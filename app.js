@@ -4,6 +4,30 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 0. Theme Toggle (Day/Night Mode)
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Default is Light theme (day). If dark theme is saved, apply it.
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
+    }
+    
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            // Save selection to localStorage
+            if (document.body.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+
     // 1. Sticky Header scroll effect
     const header = document.querySelector('.main-header');
     
